@@ -1,0 +1,2 @@
+Añadir aca historias como 
+historia_<nickname>_01.pdf
