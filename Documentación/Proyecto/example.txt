@@ -1,0 +1,3 @@
+diagramas.md
+script_implementación.sql
+otros...
