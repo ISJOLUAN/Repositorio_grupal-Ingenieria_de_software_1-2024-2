@@ -1,8 +1,8 @@
 Integrantes del grupo:
-Andres Felipe Ramirez Montana
-Isabella Garces Acosta
-Johan David Lozano Leiva
-Maria Luisa Bautista Arango
+Andres Felipe Ramirez Montana, 
+Isabella Garces Acosta, 
+Johan David Lozano Leiva, 
+Maria Luisa Bautista Arango.
 
 Nombre del proyecto:
 
