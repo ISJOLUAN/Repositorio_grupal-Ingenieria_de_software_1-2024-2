@@ -13,6 +13,6 @@ para estudiantes de ingeniería de sistemas por medio de una página web con
 una interfaz atractiva.
 
 Tecnologías a utilizar:
--Java -Spring -HTML -astro -CSS -tailwind
+-Java -Spring -HTML -astro -CSS -tailwind -Javascript -Firebase
 
 Icono, imagen, logo de su app
