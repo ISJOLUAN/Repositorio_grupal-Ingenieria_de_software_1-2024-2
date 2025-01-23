@@ -4,7 +4,7 @@ Isabella Garces Acosta,
 Johan David Lozano Leiva, 
 Maria Luisa Bautista Arango.
 
-Nombre del proyecto:
+Nombre del proyecto: LearnHub
 
 Descripción del objetivo del proyecto: 
 Facilitar el acceso a información sobre materias, cursos extra (coursera)
