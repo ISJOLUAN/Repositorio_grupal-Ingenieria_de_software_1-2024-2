@@ -14,7 +14,7 @@
 
 ## Integrantes✨:
 
-- 🖥️🚀Andres Felipe Ramirez Montana.
+- 🖥️🚀Andres Felipe Ramirez Montaña.
 - 🎨📊Isabella Garces Acosta.
 - 🖌️🖥️Johan David Lozano Leiva.
 - 🔒📊Maria Luisa Bautista Arango.
@@ -35,4 +35,11 @@ Esta aplicación web está diseñada para facilitar el acceso a información aca
 - JavaScript 💻🔧
 - Firebase ☁️🔥
 
-Icono, imagen, logo de su app
+--- 
+## logo de la App📌🖼️
+
+![image](https://github.com/user-attachments/assets/0ea70968-3ff9-4dc3-ae0c-c377c9e5ee16)
+
+
+
+
