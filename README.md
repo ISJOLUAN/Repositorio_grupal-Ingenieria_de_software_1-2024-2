@@ -1,3 +1,6 @@
+## 👩‍💻🔧 Ingeniería de Software 1 - 2024-2 Grupo 1 👨‍💻🛠️
+
+
 # 🔥LearnHub🔥📦📚👩‍💻
 
 ![Badge-Spring Boot](https://img.shields.io/badge/Spring%20Boot-6DB33F?style=for-the-badge&logo=spring-boot&logoColor=white)
@@ -8,7 +11,6 @@
 ![Badge-Tailwind CSS](https://img.shields.io/badge/Tailwind%20CSS-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white)
 ![Badge-JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
 ![Badge-Firebase](https://img.shields.io/badge/Firebase-FFCA28?style=for-the-badge&logo=firebase&logoColor=black)
-
 
 ## Integrantes✨:
 
