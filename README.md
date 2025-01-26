@@ -25,7 +25,15 @@
 ## Descripción del objetivo del proyecto 📄
 Esta aplicación web está diseñada para facilitar el acceso a información académica y programas extracurriculares dentro de la Universidad Nacional de Colombia. Su objetivo principal es dar a conocer herramientas complementarias como cursos externos (**Cursera**) y programas extracurriculares, permitiendo no solo consultar información, sino también interactuar con los integrantes y expandir el conocimineto. Además, la aplicación busca centralizar y simplificar el acceso a información clave sobre las materias de la línea de **Ingeniería de Sistemas y Computación**, reduciendo las incertidumbres que enfrentan los estudiantes nuevos. De esta manera, se promueve un acceso rápido, eficiente y organizado a la información, mejorando el entendimiento académico y fomentando la participación en actividades complementarias para enriquecer la experiencia universitaria.
 
-Tecnologías a utilizar:
--Java -Spring -HTML -astro -CSS -tailwind -Javascript -Firebase
+--- 
+
+## Tecnologias a Usar: ☁️🚀⚙️
+- Spring Boot 3: ⚙️💻
+- Java 17: ☕️💻
+- HTML 5: 🌐📝
+- Astro (Front-end): 🌟🖥️
+- Tailwind CSS: 🌬️🎨
+- JavaScript: 💻🔧
+- Firebase: ☁️🔥
 
 Icono, imagen, logo de su app
