@@ -35,4 +35,9 @@ Esta aplicación web está diseñada para facilitar el acceso a información aca
 - JavaScript 💻🔧
 - Firebase ☁️🔥
 
-Icono, imagen, logo de su app
+--- 
+## logo de la App📌🖼️
+
+![image](https://github.com/user-attachments/assets/3d32d194-ce1a-4dc3-8a83-994c3ed1d560)
+
+
