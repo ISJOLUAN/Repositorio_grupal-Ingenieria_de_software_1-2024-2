@@ -38,6 +38,8 @@ Esta aplicación web está diseñada para facilitar el acceso a información aca
 --- 
 ## logo de la App📌🖼️
 
-![image](https://github.com/user-attachments/assets/3d32d194-ce1a-4dc3-8a83-994c3ed1d560)
+![image](https://github.com/user-attachments/assets/0ea70968-3ff9-4dc3-ae0c-c377c9e5ee16)
+
+
 
 
