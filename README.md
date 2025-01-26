@@ -28,12 +28,12 @@ Esta aplicación web está diseñada para facilitar el acceso a información aca
 --- 
 
 ## Tecnologias a Usar: ☁️🚀⚙️
-- Spring Boot 3: ⚙️💻
-- Java 17: ☕️💻
-- HTML 5: 🌐📝
-- Astro (Front-end): 🌟🖥️
-- Tailwind CSS: 🌬️🎨
-- JavaScript: 💻🔧
-- Firebase: ☁️🔥
+- Spring Boot 3 ⚙️💻
+- Java 17 ☕️💻
+- HTML 5 🌐📝
+- Astro (Front-end) 🌟🖥️
+- Tailwind CSS 🌬️🎨
+- JavaScript 💻🔧
+- Firebase ☁️🔥
 
 Icono, imagen, logo de su app
