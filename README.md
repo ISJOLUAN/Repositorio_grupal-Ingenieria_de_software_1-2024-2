@@ -14,7 +14,7 @@
 
 ## Integrantes✨:
 
-- 🖥️🚀Andres Felipe Ramirez Montana.
+- 🖥️🚀Andres Felipe Ramirez Montaña.
 - 🎨📊Isabella Garces Acosta.
 - 🖌️🖥️Johan David Lozano Leiva.
 - 🔒📊Maria Luisa Bautista Arango.
