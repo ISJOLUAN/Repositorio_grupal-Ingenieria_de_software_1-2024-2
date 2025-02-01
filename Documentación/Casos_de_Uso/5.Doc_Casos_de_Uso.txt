@@ -1,0 +1,9 @@
+5. Documento de Casos de Uso
+
+Introducción:
+Objetivo: Crear una plataforma web intuitiva para estudiantes de ingeniería de sistemas que facilite la búsqueda de materias, cursos y actividades extracurriculares.
+Actores:
+Estudiantes: Usuarios principales que buscan información sobre electivas y actividades.
+Administradores de Canal: Encargados de gestionar los canales de actividades extracurriculares.
+Miembro de Canal: participante de los canales de actividades extracurriculares.
+Nota: (Un solo usuario puede cumplir con los tres roles, ya que puede ser estudiante, tener canales propios y ser miembro de canales de otros administradores)
