@@ -14,10 +14,10 @@
 
 ## Integrantes✨:
 
-- 🖥️🚀Andres Felipe Ramirez Montaña.
-- 🎨📊Isabella Garces Acosta.
-- 🖌️🖥️Johan David Lozano Leiva.
-- 🔒📊Maria Luisa Bautista Arango.
+- 🖥️🚀Andres Felipe Ramirez Montaña. (andramirezm@unal.edu.co)
+- 🎨📊Isabella Garces Acosta. (igarcesa@unal.edu.co)
+- 🖌️🖥️Johan David Lozano Leiva. (jlozanol@unal.edu.co)
+- 🔒📊Maria Luisa Bautista Arango. (mbautistaa@unal.edu.co)
 
 ---
 
