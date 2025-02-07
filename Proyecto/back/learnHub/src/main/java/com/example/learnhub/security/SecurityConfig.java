@@ -22,6 +22,7 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http
+
                 .authorizeHttpRequests(registry -> {
                     registry.requestMatchers(HttpMethod.GET,"/login", "/logout", "/session").permitAll();
                     registry.anyRequest().authenticated();
