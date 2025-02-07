@@ -1,4 +1,4 @@
-# 👩‍💻🔧 Ingeniería de Software 1 - 2024-2 Grupo 1 👨‍💻🛠️
+e# 👩‍💻🔧 Ingeniería de Software 1 - 2024-2 Grupo 1 👨‍💻🛠️
 
 ---
 
@@ -14,15 +14,15 @@
 
 ## Integrantes✨:
 
-- 🖥️🚀Andres Felipe Ramirez Montaña.
-- 🎨📊Isabella Garces Acosta.
-- 🖌️🖥️Johan David Lozano Leiva.
-- 🔒📊Maria Luisa Bautista Arango.
+- 🖥️🚀Andres Felipe Ramirez Montaña. (andramirezm@unal.edu.co)
+- 🎨📊Isabella Garces Acosta. (igarcesa@unal.edu.co)
+- 🖌️🖥️Johan David Lozano Leiva. (jlozanol@unal.edu.co)
+- 🔒📊Maria Luisa Bautista Arango. (mbautistaa@unal.edu.co)
 
 ---
 
 ## Descripción del objetivo del proyecto 📄✏️
-Esta aplicación web está diseñada para facilitar el acceso a información académica y programas extracurriculares dentro de la Universidad Nacional de Colombia. Su objetivo principal es dar a conocer herramientas complementarias como cursos externos (**Cursera**) y programas extracurriculares, permitiendo no solo consultar información, sino también interactuar con los integrantes y expandir el conocimiento. Además, la aplicación busca centralizar y simplificar el acceso a información clave sobre las materias de la línea de **Ingeniería de Sistemas y Computación**, reduciendo las incertidumbres que enfrentan los estudiantes nuevos. De esta manera, se promueve un acceso rápido, eficiente y organizado a la información, mejorando el entendimiento académico y fomentando la participación en actividades complementarias para enriquecer la experiencia universitaria.
+Esta aplicación web está diseñada para facilitar el acceso a información académica y programas extracurriculares dentro de la Universidad Nacional de Colombia. Su objetivo principal es dar a conocer herramientas complementarias como cursos externos (**Cursera**) y programas extracurriculares, permitiendo no solo consultar información, sino también interactuar con los integrantes y expandir el conocimiento. Además, la aplicación busca centralizar y simplificar el acceso a información clave sobre las materias **Electivas**, reduciendo las incertidumbres que enfrentan los estudiantes nuevos. De esta manera, se promueve un acceso rápido, eficiente y organizado a la información, mejorando el entendimiento académico y fomentando la participación en actividades complementarias para enriquecer la experiencia universitaria.
 
 --- 
 
