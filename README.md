@@ -1,4 +1,4 @@
-e# 👩‍💻🔧 Ingeniería de Software 1 - 2024-2 Grupo 1 👨‍💻🛠️
+## 👩‍💻🔧 Ingeniería de Software 1 - 2024-2 Grupo 1 👨‍💻🛠️
 
 ---
 
