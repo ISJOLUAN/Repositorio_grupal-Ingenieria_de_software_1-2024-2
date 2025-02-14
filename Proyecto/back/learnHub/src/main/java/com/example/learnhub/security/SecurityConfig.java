@@ -22,10 +22,11 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http
-
+                .csrf(csrf -> csrf.ignoringRequestMatchers("/api/**"))
                 .authorizeHttpRequests(registry -> {
                     registry.requestMatchers(HttpMethod.GET,"/login", "/logout", "/session").permitAll();
-                    registry.anyRequest().authenticated();
+                    //registry.requestMatchers("/login").authenticated();
+                    registry.anyRequest().permitAll();
                 })
                 .oauth2Login(oaut2 -> {
                     oaut2.successHandler((request, response, authentication) -> {
@@ -51,7 +52,7 @@ public class SecurityConfig {
                     logout.deleteCookies("JSESSIONID");
                     SecurityContextHolder.clearContext();
                 })
-                .formLogin(Customizer.withDefaults())
+                //.formLogin(Customizer.withDefaults())
                 .build();
 
     }
