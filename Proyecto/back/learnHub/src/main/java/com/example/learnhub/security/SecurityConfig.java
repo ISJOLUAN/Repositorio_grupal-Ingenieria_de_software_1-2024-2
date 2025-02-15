@@ -36,7 +36,7 @@ public class SecurityConfig {
                                 attributes = user.getAttributes();
                                 String email = (String) attributes.get("email");
                                 if(email.endsWith("@unal.edu.co")){
-                                    response.sendRedirect("https://mail.google.com/mail/u/0/?tab=rm&ogbl#inbox");
+                                    response.sendRedirect("https://learnhub-front.vercel.app/");
                                 }else {
                                     SecurityContextHolder.clearContext();
                                     response.sendRedirect("/login?error=true");
