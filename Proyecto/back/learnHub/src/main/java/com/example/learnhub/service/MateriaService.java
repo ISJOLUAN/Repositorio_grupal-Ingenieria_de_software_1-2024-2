@@ -2,11 +2,13 @@ package com.example.learnhub.service;
 
 import com.example.learnhub.entity.Materia;
 import com.example.learnhub.repositories.MateriaRepository;
+import com.google.api.core.ApiFuture;
 import com.google.cloud.firestore.*;
 import com.google.firebase.cloud.FirestoreClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
@@ -15,13 +17,14 @@ public class MateriaService {
     @Autowired
     private MateriaRepository materiaRepository;
 
+    public List<Materia> buscarPorCoincidencia(String searchTerm) throws ExecutionException, InterruptedException {
+        return materiaRepository.buscarPorCoincidencia(searchTerm);
+    }
+
     public Materia getMateriaByCodigo(String codigo) throws ExecutionException, InterruptedException {
         return materiaRepository.findByCodigo(codigo);
     }
 
-    public List<Materia> searchMaterias(String searchTerm) throws ExecutionException, InterruptedException {
-        return materiaRepository.findByCodigoOrNombreContaining(searchTerm);
-    }
 
     private static final String COLLECTION_NAME = "materias";
 
@@ -33,8 +36,6 @@ public class MateriaService {
 
         return "Materia guardada exitosamente: " + materia.getCodigo();
     }
-
-
 
     public String saveMaterias(List<Materia> materias) throws ExecutionException, InterruptedException {
         Firestore dbFirestore = FirestoreClient.getFirestore();

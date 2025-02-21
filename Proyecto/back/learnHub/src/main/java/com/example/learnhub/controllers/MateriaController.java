@@ -13,30 +13,27 @@ import java.util.concurrent.ExecutionException;
 @RequestMapping("/api/materias")
 public class MateriaController {
 
-    @Autowired
-    private MateriaService productService;
 
     @Autowired
     private MateriaService materiaService;
 
-    @GetMapping("/{codigo}")
-    public Materia getMateria(@PathVariable String codigo) throws ExecutionException, InterruptedException {
-        return materiaService.getMateriaByCodigo(codigo);
-    }
-
-    @GetMapping("/search")
-    public List<Materia> searchMaterias(@RequestParam String query) throws ExecutionException, InterruptedException {
-        return materiaService.searchMaterias(query);
+    @GetMapping("/buscar")
+    public List<Materia> buscarMaterias(@RequestParam String q) {
+        try {
+            return materiaService.buscarPorCoincidencia(q);
+        } catch (ExecutionException | InterruptedException e) {
+            throw new RuntimeException("Error al buscar materias", e);
+        }
     }
 
     @PostMapping("/newMateria")
     public String createMateria(@RequestBody Materia materia) throws ExecutionException, InterruptedException {
-        return productService.saveMateria(materia);
+        return materiaService.saveMateria(materia);
     }
 
     @PostMapping("/materias/batch")
     public String saveMaterias(@RequestBody List<Materia> materias) throws ExecutionException, InterruptedException {
-        return productService.saveMaterias(materias);
+        return materiaService.saveMaterias(materias);
     }
 
 }

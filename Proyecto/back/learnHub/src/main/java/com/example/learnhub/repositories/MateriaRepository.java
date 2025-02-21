@@ -5,8 +5,7 @@ import com.google.api.core.ApiFuture;
 import com.google.cloud.firestore.*;
 import com.google.firebase.cloud.FirestoreClient;
 import org.springframework.stereotype.Repository;
-
-
+import com.example.learnhub.utils.StringUtils;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
@@ -30,7 +29,7 @@ public class MateriaRepository {
         }
     }
 
-    public List<Materia> findByCodigoOrNombreContaining(String searchTerm) throws ExecutionException, InterruptedException {
+    public List<Materia> buscarPorCoincidencia(String searchTerm) throws ExecutionException, InterruptedException {
         Firestore dbFirestore = FirestoreClient.getFirestore();
         CollectionReference collectionReference = dbFirestore.collection(COLLECTION_NAME);
 
@@ -38,12 +37,23 @@ public class MateriaRepository {
         ApiFuture<QuerySnapshot> future = collectionReference.get();
         List<QueryDocumentSnapshot> documents = future.get().getDocuments();
 
+        // Normalizar el término de búsqueda (minúsculas y sin tildes)
+        String searchTermNormalized = StringUtils.removeTildes(searchTerm.toLowerCase());
+
         // Filtrar en memoria
         List<Materia> materias = new ArrayList<>();
         for (QueryDocumentSnapshot document : documents) {
             Materia materia = document.toObject(Materia.class);
-            if (materia.getCodigo().toLowerCase().contains(searchTerm.toLowerCase()) ||
-                    materia.getNombre().toLowerCase().contains(searchTerm.toLowerCase())) {
+
+            // Normalizar los campos (minúsculas y sin tildes)
+            String codigoNormalized = StringUtils.removeTildes(materia.getCodigo() != null ? materia.getCodigo().toLowerCase() : "");
+            String nombreNormalized = StringUtils.removeTildes(materia.getNombre() != null ? materia.getNombre().toLowerCase() : "");
+            String descripcionNormalized = StringUtils.removeTildes(materia.getDescripcion() != null ? materia.getDescripcion().toLowerCase() : "");
+
+            // Verificar si el término de búsqueda coincide en alguno de los campos
+            if (codigoNormalized.contains(searchTermNormalized) ||
+                    nombreNormalized.contains(searchTermNormalized) ||
+                    descripcionNormalized.contains(searchTermNormalized)) {
                 materias.add(materia);
             }
         }
