@@ -2,9 +2,6 @@ package com.example.learnhub.controllers;
 
 import com.example.learnhub.DTO.Token;
 import com.example.learnhub.services.TokenService;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -34,16 +31,14 @@ public class SessionController {
 
     // usado para los datos del usuario autenticado por Google
     @GetMapping(value = "/dataUser")
-    public ResponseEntity<Map<String, Object>> getSessionData() {
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_JSON);
+    public Map<String, Object> getSessionData() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         Map<String, Object> sessionData = new HashMap<>();
         if(auth != null && auth.isAuthenticated()) {
             DefaultOAuth2User oAuth2User = (DefaultOAuth2User) auth.getPrincipal();
             sessionData = oAuth2User.getAttributes();
         }
-        return new ResponseEntity<>(sessionData,headers, HttpStatus.OK);
+        return sessionData;
     }
 
     // url para la validacion del token y saber si el usuario es valido.
@@ -55,12 +50,10 @@ public class SessionController {
 
         OAuth2AuthorizedClient client = authorizedClientService.loadAuthorizedClient(clientRegistrationId, auth2AuthenticationToken.getName());
         var tokens = new Token(client.getAccessToken().getTokenValue());
-
-        Boolean valid = tokenService.validateToken(tokens.tokenByGoogle());
+        boolean valid = tokenService.validateToken(tokens.tokenByGoogle());
 
         map.put("token by google", tokens.tokenByGoogle());
         map.put("es valido?",valid);
-        System.out.println(map);
         return ResponseEntity.ok(map);
     }
 }
