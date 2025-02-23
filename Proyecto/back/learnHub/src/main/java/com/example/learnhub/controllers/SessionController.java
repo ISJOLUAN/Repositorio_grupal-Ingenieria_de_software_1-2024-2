@@ -2,6 +2,7 @@ package com.example.learnhub.controllers;
 
 import com.example.learnhub.DTO.Token;
 import com.example.learnhub.services.TokenService;
+import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -15,19 +16,14 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.HashMap;
 import java.util.Map;
 
-
 // usado para traer datos de la sesion
 @RestController
 @RequestMapping("/session")
+@AllArgsConstructor
 public class SessionController {
 
     private final OAuth2AuthorizedClientService authorizedClientService;
     private final TokenService tokenService;
-
-    public SessionController(OAuth2AuthorizedClientService authorizedClientService, TokenService tokenService) {
-        this.authorizedClientService = authorizedClientService;
-        this.tokenService = tokenService;
-    }
 
     // usado para los datos del usuario autenticado por Google
     @GetMapping(value = "/dataUser")
@@ -46,7 +42,6 @@ public class SessionController {
     public ResponseEntity<Map<String,Object>> getUserInfo(OAuth2AuthenticationToken auth2AuthenticationToken){
         Map<String,Object> map = new HashMap<>();
         String clientRegistrationId = auth2AuthenticationToken.getAuthorizedClientRegistrationId();
-
 
         OAuth2AuthorizedClient client = authorizedClientService.loadAuthorizedClient(clientRegistrationId, auth2AuthenticationToken.getName());
         var tokens = new Token(client.getAccessToken().getTokenValue());

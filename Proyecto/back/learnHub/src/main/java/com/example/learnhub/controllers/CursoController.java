@@ -1,7 +1,7 @@
 package com.example.learnhub.controllers;
 import com.example.learnhub.entities.Curso;
 import com.example.learnhub.services.CursoService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -9,9 +9,11 @@ import java.util.concurrent.ExecutionException;
 
 @RestController
 @RequestMapping("/api/cursos")
+@AllArgsConstructor
 public class CursoController {
-    @Autowired
+
     private CursoService cursoService;
+
     @GetMapping("/buscar")
     public List<Curso> buscarMaterias(@RequestParam String q) {
         try {

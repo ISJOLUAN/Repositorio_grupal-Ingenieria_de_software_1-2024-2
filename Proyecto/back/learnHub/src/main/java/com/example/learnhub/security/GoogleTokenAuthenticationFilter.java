@@ -1,9 +1,9 @@
 package com.example.learnhub.security;
 
-
 import com.example.learnhub.services.TokenService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.FilterChain;
+import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.http.HttpStatus;
@@ -11,28 +11,29 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.stream.Stream;
 
 public class GoogleTokenAuthenticationFilter extends OncePerRequestFilter {
     private static final String TOKEN_PREFIX = "Bearer ";
     private static final String HEADER_STRING = "Authorization";
 
     private static final TokenService tokenService = new TokenService();
-    // Lista de rutas públicas que deben ignorar la validación del token
-    private static final String[] PUBLIC_PATHS = {"/login", "/logout","/session/user"};
+
+    @Override
+    protected boolean shouldNotFilter(HttpServletRequest request) throws ServletException {
+        // Ignorar el filtro para rutas públicas
+        String path = request.getRequestURI();
+        return path.startsWith("/learnhub") ||  // Excluye WebSocket y archivos estáticos
+                Stream.of("/login", "/logout", "/session/user", "/session/dataUser","/default-ui.css","/index.html","/css/main.css","/js/main.js").anyMatch(path::startsWith);
+    }
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws IOException {
         try {
 
-            // Verificar si la solicitud es para una ruta pública
-            String path = request.getRequestURI();
-            if (Arrays.asList(PUBLIC_PATHS).contains(path)) {
-                filterChain.doFilter(request, response); // Ignorar validación para rutas públicas
-                return;
-            }
+            System.out.println("Solicitud recibida: " + request.getRequestURI());
 
             // Extraer el token del encabezado Authorization
             String header = request.getHeader(HEADER_STRING);

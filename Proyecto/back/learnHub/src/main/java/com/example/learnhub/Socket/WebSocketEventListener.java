@@ -1,4 +1,4 @@
-package com.example.learnhub.SocketConfig;
+package com.example.learnhub.Socket;
 
 import com.example.learnhub.chat.ChatMessage;
 import com.example.learnhub.chat.MessageType;

@@ -1,5 +1,6 @@
 package com.example.learnhub.security;
 
+import com.example.learnhub.services.EstudianteService;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -22,11 +23,16 @@ import java.util.Map;
 @AllArgsConstructor
 public class SecurityConfig {
 
+    // utilizando:  dominio/login/oauth2/code/google
+
+    private final EstudianteService estudianteService;
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http
                 .authorizeHttpRequests(registry -> {
                     registry.requestMatchers("/login", "/logout").permitAll();
+                    registry.requestMatchers("/favicon.ico", "/css/**", "/js/**").permitAll();
                     registry.anyRequest().authenticated();
                 })
                 .oauth2Login(oaut2 -> {
@@ -39,6 +45,7 @@ public class SecurityConfig {
                                 attributes = user.getAttributes();
                                 String email = (String) attributes.get("email");
                                 if(email.endsWith("@unal.edu.co")){
+                                    estudianteService.saveEstudiante();
                                     response.sendRedirect("https://learnhub-front.vercel.app/");
                                 }else {
                                     SecurityContextHolder.clearContext();
@@ -61,6 +68,5 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .addFilterBefore(new GoogleTokenAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class)
                 .build();
-
     }
 }

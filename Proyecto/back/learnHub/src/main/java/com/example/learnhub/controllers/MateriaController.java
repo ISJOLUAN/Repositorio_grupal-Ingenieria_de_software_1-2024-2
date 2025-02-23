@@ -2,6 +2,7 @@ package com.example.learnhub.controllers;
 
 import com.example.learnhub.entities.Materia;
 import com.example.learnhub.services.MateriaService;
+import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -9,14 +10,11 @@ import java.util.concurrent.ExecutionException;
 
 @RestController
 @RequestMapping("/api/materias")
+@AllArgsConstructor
 public class MateriaController {
-
 
     private final MateriaService materiaService;
 
-    public MateriaController(MateriaService materiaService) {
-        this.materiaService = materiaService;
-    }
 
     @GetMapping("/buscar")
     public List<Materia> buscarMaterias(@RequestParam String q) {

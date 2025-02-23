@@ -16,8 +16,8 @@ import java.util.concurrent.ExecutionException;
 
 @Repository
 public class CanalRepository {
-    private static final String COLLECTION_NAME = "canales";
 
+    private static final String COLLECTION_NAME = "canales";
 
     public List<Canal> buscarPorCoincidencia(String searchTerm) throws ExecutionException, InterruptedException {
         Firestore dbFirestore = FirestoreClient.getFirestore();
