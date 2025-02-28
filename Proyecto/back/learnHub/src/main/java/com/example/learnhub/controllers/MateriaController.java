@@ -16,8 +16,8 @@ public class MateriaController {
     private final MateriaService materiaService;
 
 
-    @GetMapping("/buscar")
-    public List<Materia> buscarMaterias(@RequestParam String q) {
+    @GetMapping("/search")
+    public List<Materia> searchMaterias(@RequestParam String q) {
         try {
             return materiaService.buscarPorCoincidencia(q);
         } catch (ExecutionException | InterruptedException e) {

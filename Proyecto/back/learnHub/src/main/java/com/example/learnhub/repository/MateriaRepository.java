@@ -15,20 +15,6 @@ public class MateriaRepository {
 
     private static final String COLLECTION_NAME = "materias";
 
-    public Materia findByCodigo(String codigo) throws ExecutionException, InterruptedException {
-        Firestore dbFirestore = FirestoreClient.getFirestore();
-
-        // Recupera el documento usando el campo 'codigo'
-        ApiFuture<DocumentSnapshot> future = dbFirestore.collection(COLLECTION_NAME).document(codigo).get();
-        DocumentSnapshot document = future.get();
-
-        if (document.exists()) {
-            return document.toObject(Materia.class);
-        } else {
-            return null;
-        }
-    }
-
     public List<Materia> buscarPorCoincidencia(String searchTerm) throws ExecutionException, InterruptedException {
         Firestore dbFirestore = FirestoreClient.getFirestore();
         CollectionReference collectionReference = dbFirestore.collection(COLLECTION_NAME);

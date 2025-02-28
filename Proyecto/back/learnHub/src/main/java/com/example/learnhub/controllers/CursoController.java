@@ -14,8 +14,8 @@ public class CursoController {
 
     private CursoService cursoService;
 
-    @GetMapping("/buscar")
-    public List<Curso> buscarMaterias(@RequestParam String q) {
+    @GetMapping("/search")
+    public List<Curso> searchMaterias(@RequestParam String q) {
         try {
             return cursoService.buscarPorCoincidencia(q);
         } catch (ExecutionException | InterruptedException e) {

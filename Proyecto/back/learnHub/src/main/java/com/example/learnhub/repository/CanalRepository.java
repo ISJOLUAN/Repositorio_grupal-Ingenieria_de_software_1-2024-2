@@ -39,10 +39,12 @@ public class CanalRepository {
             String codigoNormalized = StringUtils.removeTildes(canal.getId() != null ? canal.getId().toLowerCase() : "");
             String nombreNormalized = StringUtils.removeTildes(canal.getNombre() != null ? canal.getNombre().toLowerCase() : "");
             String descripcionNormalized = StringUtils.removeTildes(canal.getDescripcion() != null ? canal.getDescripcion().toLowerCase() : "");
+            String areaNormalized = StringUtils.removeTildes(canal.getArea() != null ? canal.getArea().toLowerCase() : "");
 
             // Verificar si el término de búsqueda coincide en alguno de los campos
             if (codigoNormalized.contains(searchTermNormalized) ||
                     nombreNormalized.contains(searchTermNormalized) ||
+                    areaNormalized.contains(searchTermNormalized)||
                     descripcionNormalized.contains(searchTermNormalized)) {
                 canales.add(canal);
             }

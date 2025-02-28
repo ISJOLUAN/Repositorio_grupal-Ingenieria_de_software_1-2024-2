@@ -22,11 +22,6 @@ public class MateriaService {
         return materiaRepository.buscarPorCoincidencia(searchTerm);
     }
 
-    public Materia getMateriaByCodigo(String codigo) throws ExecutionException, InterruptedException {
-        return materiaRepository.findByCodigo(codigo);
-    }
-
-
     private static final String COLLECTION_NAME = "materias";
 
     public String saveMateria(Materia materia) throws ExecutionException, InterruptedException {
