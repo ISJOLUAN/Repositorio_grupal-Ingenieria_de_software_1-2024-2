@@ -4,16 +4,9 @@ import com.example.learnhub.entities.Canal;
 import com.example.learnhub.services.CanalService;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.oauth2.core.user.DefaultOAuth2User;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.security.core.context.SecurityContextHolder;
-import com.google.cloud.firestore.QueryDocumentSnapshot;
-import org.springframework.security.oauth2.core.user.OAuth2User;
-
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.concurrent.ExecutionException;
 
 @RestController
@@ -33,8 +26,39 @@ public class CanalController {
         }
     }
     @PostMapping("/newCanal")
-    public String createCanal(@RequestBody Canal canal) throws ExecutionException, InterruptedException {
-        return canalService.saveCanal(canal);
+    public String createCanal(@RequestParam String nombre,
+                              @RequestParam String descripcion,
+                              @RequestParam String area,
+                              @RequestParam(required = false, defaultValue = "100") int capacity) {
+        try {
+            // Validar campos requeridos
+            if (nombre.trim().isEmpty() || descripcion.trim().isEmpty() || area.trim().isEmpty()) {
+                return "Todos los campos son obligatorios.";
+            }
+
+            // Obtener el usuario autenticado
+            Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+            if (auth == null || !auth.isAuthenticated()) {
+                return "Error: Usuario no autenticado.";
+            }
+
+            String email = (String) auth.getPrincipal(); // Obtiene el email del usuario autenticado
+
+            // Crear el canal
+            Canal canal = new Canal();
+            canal.setNombre(nombre);
+            canal.setDescripcion(descripcion);
+            canal.setArea(area);
+            canal.setCapacity(capacity);
+            canal.setCurrentSize(1); // El creador ya es miembro
+            canal.setAdministrador(email); // Asigna al creador como administrador
+            canal.setMiembros(List.of(email)); // Agrega al creador en la lista de miembros
+
+            // Guardar el canal en Firestore
+            return canalService.saveCanal(canal);
+        } catch (Exception e) {
+            return "Error al crear el canal: " + e.getMessage();
+        }
     }
     @PostMapping("/{channelId}/send")
     public String sendMessage(@PathVariable String channelId,
@@ -69,5 +93,15 @@ public class CanalController {
         } catch (Exception e) {
             throw new RuntimeException("Error al obtener los mensajes", e);
         }
+    }
+
+    @PostMapping("/unirse/{canalId}")
+    public String unirseACanal(@PathVariable String canalId) throws ExecutionException, InterruptedException {
+        return canalService.unirseACanal(canalId);
+    }
+
+    @DeleteMapping("/deleteAllCanales")
+    public String deleteAllCanales() throws ExecutionException, InterruptedException {
+        return canalService.deleteAllCanales();
     }
 }
