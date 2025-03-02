@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @Getter
 @Setter
 @AllArgsConstructor
@@ -17,4 +19,6 @@ public class Canal {
     private int capacity;
     private int currentSize;
     private String descripcion;
+    private String administrador;
+    private List<String> miembros;
 }

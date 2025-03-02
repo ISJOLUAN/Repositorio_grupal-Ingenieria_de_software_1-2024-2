@@ -52,4 +52,28 @@ public class CanalRepository {
 
         return canales;
     }
+    public List<Canal> buscarPorArea(String area) throws ExecutionException, InterruptedException {
+        Firestore dbFirestore = FirestoreClient.getFirestore();
+        CollectionReference collectionReference = dbFirestore.collection(COLLECTION_NAME);
+
+        // Obtener todos los documentos
+        ApiFuture<QuerySnapshot> future = collectionReference.get();
+        List<QueryDocumentSnapshot> documents = future.get().getDocuments();
+
+        // Normalizar el área de búsqueda
+        String areaNormalized = StringUtils.removeTildes(area.toLowerCase());
+
+        // Filtrar los canales por área
+        List<Canal> canales = new ArrayList<>();
+        for (QueryDocumentSnapshot document : documents) {
+            Canal canal = document.toObject(Canal.class);
+            String canalAreaNormalized = StringUtils.removeTildes(canal.getArea() != null ? canal.getArea().toLowerCase() : "");
+
+            if (canalAreaNormalized.equals(areaNormalized)) {
+                canales.add(canal);
+            }
+        }
+
+        return canales;
+    }
 }
