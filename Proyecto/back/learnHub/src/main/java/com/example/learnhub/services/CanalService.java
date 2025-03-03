@@ -2,6 +2,7 @@ package com.example.learnhub.services;
 
 
 import com.example.learnhub.entities.Canal;
+import com.example.learnhub.entities.Estudiante;
 import com.example.learnhub.repository.CanalRepository;
 import com.google.api.core.ApiFuture;
 import com.google.cloud.firestore.*;
@@ -20,10 +21,11 @@ import java.util.concurrent.ExecutionException;
 public class CanalService {
 
     private final CanalRepository canalRepository;
+    private final EstudianteService estudianteService;
 
-
-    public CanalService(CanalRepository canalRepository) {
+    public CanalService(CanalRepository canalRepository, EstudianteService estudianteService) {
         this.canalRepository = canalRepository;
+        this.estudianteService = estudianteService;
     }
 
     public List<Canal> buscarPorCoincidencia(String searchTerm) throws ExecutionException, InterruptedException {
@@ -96,7 +98,7 @@ public class CanalService {
         }
 
         String email = (String) auth.getPrincipal();
-
+        Estudiante miembro = estudianteService.getEstudianteByEmail(email);
         // Verificar si el usuario ya está en la lista de miembros
         if (canal.getMiembros().contains(email)) {
             return "Ya eres miembro de este canal.";
@@ -108,7 +110,7 @@ public class CanalService {
         }
 
         // Agregar el usuario a la lista de miembros
-        canal.getMiembros().add(email);
+        canal.getMiembros().add(miembro);
         canal.setCurrentSize(canal.getCurrentSize() + 1);
 
         // Actualizar Firestore con la nueva lista de miembros
@@ -117,6 +119,67 @@ public class CanalService {
         return "Te has unido al canal correctamente.";
     }
 
+    public List<Canal> obtenerMisCanales(String email) throws ExecutionException, InterruptedException {
+        Firestore dbFirestore = FirestoreClient.getFirestore();
+        CollectionReference canalesRef = dbFirestore.collection("canales");
+
+        // Obtener todos los canales
+        ApiFuture<QuerySnapshot> future = canalesRef.get();
+        List<QueryDocumentSnapshot> documentos = future.get().getDocuments();
+        Estudiante miembro = estudianteService.getEstudianteByEmail(email);
+        List<Canal> misCanales = new ArrayList<>();
+
+        for (QueryDocumentSnapshot doc : documentos) {
+            Canal canal = doc.toObject(Canal.class);
+
+            // Verificar si el usuario es administrador o miembro del canal
+            if (canal.getAdministrador().equals(miembro) || canal.getMiembros().contains(miembro)) {
+                misCanales.add(canal);
+            }
+        }
+        return misCanales;
+    }
+
+    public List<Map<String, String>> obtenerMiembrosCanal(String canalId) throws ExecutionException, InterruptedException {
+        Firestore dbFirestore = FirestoreClient.getFirestore();
+        DocumentReference canalRef = dbFirestore.collection("canales").document(canalId);
+        DocumentSnapshot canalDoc = canalRef.get().get();
+
+        if (!canalDoc.exists()) {
+            throw new IllegalArgumentException("El canal no existe.");
+        }
+
+        Canal canal = canalDoc.toObject(Canal.class);
+        if (canal == null) {
+            throw new IllegalArgumentException("Error al obtener los datos del canal.");
+        }
+
+        List<Map<String, String>> miembrosLista = new ArrayList<>();
+
+        // Obtener datos del administrador
+        // Obtener datos del administrador
+        Estudiante administrador = canal.getAdministrador();
+        if (administrador != null) {
+            Map<String, String> adminData = new HashMap<>();
+            adminData.put("nombre", administrador.getNombreCompleto()); // Usa el nuevo método
+            adminData.put("email", administrador.getCorreo());
+            adminData.put("rol", "Administrador");
+            miembrosLista.add(adminData);
+        }
+
+// Obtener datos de los miembros
+        for (Estudiante miembro : canal.getMiembros()) {
+            if (miembro != null) {
+                Map<String, String> miembroData = new HashMap<>();
+                miembroData.put("nombre", miembro.getNombreCompleto()); // Usa el nuevo método
+                miembroData.put("email", miembro.getCorreo());
+                miembroData.put("rol", "Miembro");
+                miembrosLista.add(miembroData);
+            }
+        }
+
+        return miembrosLista;
+    }
 
     public String deleteAllCanales() throws ExecutionException, InterruptedException {
         Firestore dbFirestore = FirestoreClient.getFirestore();

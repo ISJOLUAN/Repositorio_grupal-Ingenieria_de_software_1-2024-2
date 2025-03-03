@@ -19,6 +19,6 @@ public class Canal {
     private int capacity;
     private int currentSize;
     private String descripcion;
-    private String administrador;
-    private List<String> miembros;
+    private Estudiante administrador;
+    private List<Estudiante> miembros;
 }

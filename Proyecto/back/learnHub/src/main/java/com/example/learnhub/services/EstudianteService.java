@@ -40,4 +40,17 @@ public class EstudianteService {
         }
     }
 
+    public Estudiante getEstudianteByEmail(String email) throws ExecutionException, InterruptedException {
+        Firestore firestore = FirestoreClient.getFirestore();
+        CollectionReference collectionReference = firestore.collection(STUDENT);
+        ApiFuture<QuerySnapshot> future = collectionReference.get();
+
+        for (QueryDocumentSnapshot document : future.get().getDocuments()) {
+            if (Objects.requireNonNull(document.getString("correo")).equals(email)) {
+                return document.toObject(Estudiante.class);
+            }
+        }
+        return null;
+    }
+
 }
