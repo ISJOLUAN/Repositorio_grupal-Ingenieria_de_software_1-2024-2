@@ -1,12 +1,17 @@
 package com.example.learnhub.controllers;
 
 import com.example.learnhub.entities.Canal;
+import com.example.learnhub.entities.Estudiante;
 import com.example.learnhub.services.CanalService;
+import com.example.learnhub.services.EstudianteService;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.security.core.context.SecurityContextHolder;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.ExecutionException;
 
 @RestController
@@ -15,7 +20,7 @@ import java.util.concurrent.ExecutionException;
 public class CanalController {
 
     private final CanalService canalService;
-
+    private final EstudianteService estudianteService;
 
     @GetMapping("/search")
     public List<Canal> buscarCanal(@RequestParam String q) {
@@ -43,7 +48,7 @@ public class CanalController {
             }
 
             String email = (String) auth.getPrincipal(); // Obtiene el email del usuario autenticado
-
+            Estudiante admin = estudianteService.getEstudianteByEmail(email);
             // Crear el canal
             Canal canal = new Canal();
             canal.setNombre(nombre);
@@ -51,8 +56,8 @@ public class CanalController {
             canal.setArea(area);
             canal.setCapacity(capacity);
             canal.setCurrentSize(1); // El creador ya es miembro
-            canal.setAdministrador(email); // Asigna al creador como administrador
-            canal.setMiembros(List.of(email)); // Agrega al creador en la lista de miembros
+            canal.setAdministrador(admin); // Asigna al creador como administrador
+            canal.setMiembros(List.of(admin)); // Agrega al creador en la lista de miembros
 
             // Guardar el canal en Firestore
             return canalService.saveCanal(canal);
@@ -98,6 +103,37 @@ public class CanalController {
     @PostMapping("/unirse/{canalId}")
     public String unirseACanal(@PathVariable String canalId) throws ExecutionException, InterruptedException {
         return canalService.unirseACanal(canalId);
+    }
+
+    @GetMapping("/misCanales")
+    public List<Canal> obtenerMisCanales() {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+
+        // Verificar si el usuario está autenticado
+        if (auth == null || !auth.isAuthenticated()) {
+            return (List<Canal>) ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Usuario no autenticado.");
+        }
+
+        try {
+            String email = (String) auth.getPrincipal(); // Obtener el email del usuario
+           // List<Canal> misCanales = canalService.obtenerMisCanales(email);
+            //return ResponseEntity.ok(misCanales);
+            return canalService.obtenerMisCanales(email);
+        } catch (Exception e) {
+            return (List<Canal>) ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error al obtener los canales.");
+        }
+    }
+
+    @GetMapping("/{canalId}/miembros")
+    public ResponseEntity<?> obtenerMiembrosCanal(@PathVariable String canalId) {
+        try {
+            List<Map<String, String>> miembros = canalService.obtenerMiembrosCanal(canalId);
+            return ResponseEntity.ok(miembros);
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error al obtener los miembros.");
+        }
     }
 
     @DeleteMapping("/deleteAllCanales")
